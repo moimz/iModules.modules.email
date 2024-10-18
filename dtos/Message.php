@@ -7,7 +7,7 @@
  * @file /modules/email/dtos/Message.php
  * @author pbj <ju318@ubion.co.kr>
  * @license MIT License
- * @modified 2024. 10. 15.
+ * @modified 2024. 10. 18.
  */
 namespace modules\email\dtos;
 class Message
@@ -78,9 +78,9 @@ class Message
     private string $_sended_at;
 
     /**
-     * @var ?string $_read_at 확인일시
+     * @var ?string $_checked_at 확인일시
      */
-    private ?string $_read_at;
+    private ?string $_checked_at;
 
     /**
      * @var string $_status 발송상태
@@ -112,7 +112,7 @@ class Message
         $this->_sended_email = $message->sended_email;
         $this->_sended_name = $message->sended_name;
         $this->_sended_at = $message->sended_at;
-        $this->_read_at = $message->read_at;
+        $this->_checked_at = $message->checked_at;
 
         $this->_status = $message->status;
         $this->_response = $message->response;
@@ -131,11 +131,11 @@ class Message
     /**
      * 확인일시를 가져온다.
      *
-     * @return ?string $read_at
+     * @return ?string $checked_at
      */
-    public function getReadAt(): ?string
+    public function getCheckedAt(): ?string
     {
-        return $this->_read_at;
+        return $this->_checked_at;
     }
 
     /**
@@ -179,7 +179,7 @@ class Message
          */
         $mEmail = \Modules::get('email');
         $sender = $mEmail->getSender(\Modules::get($this->_component_name));
-        return $sender->setContent($this->_content)->getContent(true, true);
+        return $sender->getContent(true, $this->_content);
     }
 
     public function getJson(): object
@@ -199,7 +199,7 @@ class Message
         $message->sended_email = $this->_sended_email;
         $message->sended_name = $this->_sended_name;
         $message->sended_at = $this->_sended_at;
-        $message->read_at = $this->_read_at;
+        $message->checked_at = $this->_checked_at;
         $message->status = $this->_status;
         $message->response = $this->_response;
 

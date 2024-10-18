@@ -7,7 +7,7 @@
  * @file /modules/email/processes/messages.get.php
  * @author ju318 <ju318@naddle.net>
  * @license MIT License
- * @modified 2024. 10. 14.
+ * @modified 2024. 10. 18.
  *
  * @var \modules\email\Email $me
  */
@@ -40,12 +40,11 @@ if ($filters !== null) {
     $records->setFilters($filters, 'AND', [
         'status' => 'status',
         'sended_at' => 'sended_at',
-        'read_at' => 'read_at',
+        'checked_at' => 'checked_at',
     ]);
 }
 
 if ($keyword !== null) {
-    //@todo
     $records->where('(name like ? or email like ?)', ['%' . $keyword . '%', '%' . $keyword . '%']);
 }
 
@@ -75,13 +74,14 @@ if ($sorters !== null) {
     foreach ($sorters as $field => $direction) {
         $records->orderBy($field, $direction);
     }
-    if (isset($sorters->sended_at) == false) {
+    if (isset($sorters->title) == false) {
         $records->orderBy('title', 'ASC');
     }
 }
 
 $total = $records->copy()->count();
 $records = $records->limit($start, $limit)->get('message_id');
+
 if ($records === null) {
     $results->success = true;
     $results->message = $me->getErrorText('NOT_FOUND_DATA');

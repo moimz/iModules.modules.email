@@ -188,11 +188,12 @@ class Sender
      * 본문을 가져온다.
      *
      * @param bool $is_template 이메일 발송을 위한 템플릿을 포함한 내용을 가져올지 여부
+     * @param string $content 템플릿이 적용된 내용을 가져오기 위한 파라메터
      * @return string $content
      */
-    public function getContent(bool $is_template = false): string
+    public function getContent(bool $is_template = false, string $content = null): string
     {
-        $content = $this->_content;
+        $content = $content ?? $this->_content;
 
         if ($is_template == true) {
             /**
@@ -319,7 +320,7 @@ class Sender
                     '</style>',
                     '</head>',
                     '<body style="width: 100% !important; height: 100% !important; margin: 0; padding: 0; background: #f4f4f4; font-family: \'Apple SD Gothic Neo\', \'malgun gothic\', Helvetica, Georgia, Arial, sans-serif !important;">',
-                    $this->getContent(true, true),
+                    $this->getContent(true),
                     '<img src="' .
                         $domain->getUrl(true) .
                         $mEmail->getApiUrl('checked/' . $message_id) .

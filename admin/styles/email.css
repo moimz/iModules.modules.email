@@ -1,13 +1,14 @@
 /**
  * 이 파일은 아이모듈 이메일모듈 일부입니다. (https://www.imodules.io)
  *
- * 모듈 관리자 스타일시트를 정의한다.
+ * 이메일 발송 내역 스타일시트를 정의한다.
  *
  * @file /modules/email/admin/styles/email.css
  * @author pbj <ju318@ubion.co.kr>
  * @license MIT License
- * @modified 2024. 10. 15.
+ * @modified 2024. 10. 18.
  */
+
 div[data-component][data-type='text'][data-role='text'] {
     & > div[data-role='container'] {
         > div[data-role='content'] {

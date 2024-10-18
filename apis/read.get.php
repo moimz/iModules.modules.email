@@ -18,7 +18,7 @@ $message_id = Request::get('id', true);
 
 if ($me->getMessage($message_id)->getReadAt() === null) {
     $me->db()
-        ->update($me->table('messages'), ['read_at' => time()])
+        ->update($me->table('messages'), ['checked_at' => time()])
         ->where('message_id', $message_id)
         ->execute();
 }

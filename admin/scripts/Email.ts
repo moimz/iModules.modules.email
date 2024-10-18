@@ -145,7 +145,15 @@ namespace modules {
                  *
                  */
                 getMemberName(member): string {
-                    return '';
+                    return (
+                        '<i class="photo" style="background-image:url(' +
+                        member.photo +
+                        ')"></i>' +
+                        member.name +
+                        ' &lt;' +
+                        member.address +
+                        '&gt;'
+                    );
                 }
             }
         }

@@ -81,6 +81,20 @@ class Address
     }
 
     /**
+     * 회원사진을 가져온다.
+     *
+     * @return string $_photo
+     */
+    public function getPhoto(): string
+    {
+        /**
+         * @var \modules\member\Member $mMember
+         */
+        $mMember = \Modules::get('member');
+        return $mMember->getMemberPhoto($this->_member_id);
+    }
+
+    /**
      * JSON 으로 변환한다.
      *
      * @return object $json
@@ -91,6 +105,7 @@ class Address
         $address->address = $this->_address;
         $address->name = $this->_name;
         $address->member_id = $this->_member_id;
+        $address->photo = $this->getPhoto();
 
         return $address;
     }
